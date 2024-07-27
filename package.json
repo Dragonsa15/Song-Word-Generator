@@ -2,9 +2,11 @@
   "name": "song-word-generator",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://dragonsa15.github.io/Song-Word-Generator",
   "dependencies": {
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^5.16.5",
     "@mui/material": "^5.16.5",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -17,8 +19,9 @@
   "scripts": {
     "start": "FAST_REFRESH=True CHOKIDAR_USEPOLLING=True react-scripts start",
     "build": "react-scripts build",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "postdeploy": "echo 'Deployment complete!'",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
