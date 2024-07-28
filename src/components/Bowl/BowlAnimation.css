@@ -1,48 +1,35 @@
-.bowl-container {
+.jar-container {
   position: relative;
   width: 300px;
   height: 300px;
+  border: 5px solid #000;
+  border-radius: 50%;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  perspective: 800px;
+  transition: transform 0.5s;
 }
 
-.bowl {
+.jar {
+  position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.1);
-  border: 5px solid rgba(0, 0, 0, 0.2);
-  position: relative;
-  overflow: hidden;
-  transform-style: preserve-3d;
 }
 
 .chit {
-  width: 30px;
-  height: 20px;
-  background-image: url('../../assets/chit.png'); /* Replace with the path to your chit image */
-  background-size: cover;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: float 8s infinite ease-in-out;
+  width: 10px;
+  height: 5px;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
 }
 
-@keyframes float {
-  0% { transform: translate(-50%, -50%) translate3d(0, 0, 0) rotate(0deg); }
-  25% { transform: translate(-50%, -50%) translate3d(30px, -40px, 20px) rotate(45deg); }
-  50% { transform: translate(-50%, -50%) translate3d(-30px, 40px, -20px) rotate(90deg); }
-  75% { transform: translate(-50%, -50%) translate3d(-30px, -40px, 20px) rotate(135deg); }
-  100% { transform: translate(-50%, -50%) translate3d(30px, 40px, -20px) rotate(180deg); }
+.hidden {
+  display: none;
 }
-
-.chit:nth-child(2) { animation-delay: 1s; }
-.chit:nth-child(3) { animation-delay: 2s; }
-.chit:nth-child(4) { animation-delay: 3s; }
-.chit:nth-child(5) { animation-delay: 4s; }
-.chit:nth-child(6) { animation-delay: 5s; }
-.chit:nth-child(7) { animation-delay: 6s; }
-.chit:nth-child(8) { animation-delay: 7s; }
