@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Song-Word-Generator/static/css/main.48b9f333.css",
-    "main.js": "/Song-Word-Generator/static/js/main.167b06f7.js",
+    "main.css": "/Song-Word-Generator/static/css/main.c2eb0a7e.css",
+    "main.js": "/Song-Word-Generator/static/js/main.d94af7c1.js",
     "index.html": "/Song-Word-Generator/index.html",
-    "main.48b9f333.css.map": "/Song-Word-Generator/static/css/main.48b9f333.css.map",
-    "main.167b06f7.js.map": "/Song-Word-Generator/static/js/main.167b06f7.js.map"
+    "main.c2eb0a7e.css.map": "/Song-Word-Generator/static/css/main.c2eb0a7e.css.map",
+    "main.d94af7c1.js.map": "/Song-Word-Generator/static/js/main.d94af7c1.js.map"
   },
   "entrypoints": [
-    "static/css/main.48b9f333.css",
-    "static/js/main.167b06f7.js"
+    "static/css/main.c2eb0a7e.css",
+    "static/js/main.d94af7c1.js"
   ]
 }
