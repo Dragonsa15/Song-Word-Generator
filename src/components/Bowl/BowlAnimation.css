@@ -4,7 +4,6 @@
   height: 300px;
   border: 5px solid #000;
   border-radius: 50%;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,6 +29,30 @@
   opacity: 0.8;
 }
 
-.hidden {
-  display: none;
+.chit {
+  position: absolute;
+  display: flex;
+  width: 10px;
+  height: 5px;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  opacity: 0.8;
+  justify-content: center;
+  align-items: center;
+  transform-origin: center center;
+  overflow: hidden; /* Ensure content stays within bounds */
 }
+
+.chit-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 4px; /* This will scale up with the chit */
+  color: black;
+  text-align: center;
+  pointer-events: none; /* Ensure no interference with mouse events */
+}
+

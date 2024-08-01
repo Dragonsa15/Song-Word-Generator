@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Box } from '@mui/material';
 import BowlAnimation from './components/Bowl/BowlAnimation';
-
+import "./App.css"
 
 function App() {
 
