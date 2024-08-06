@@ -141,8 +141,8 @@ const BowlAnimation = () => {
 
   return (
     <>
-      <FlowerDisplay word={word} style={{position: 'absolute', top:-500, left: 0}}/>
       <Container style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '50px' }}>
+      <FlowerDisplay />
       {!word && <DrawButton onClick={drawChit} />}
       {word && <WordDisplay word={word} onAccept={acceptWord} onReroll={rerollWord} />}
       <AcceptedWords words={acceptedWords} />
