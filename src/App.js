@@ -6,17 +6,20 @@ import GlobalStyle from './globalStyles';
 import BowlAnimation from './components/Bowl/BowlAnimation';
 import theme from './theme';
 import './App.css';
+import { AnimationProvider } from './providers/AnimationProvider';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <GlobalStyle />
-      <Container>
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 5 }}>
-          <BowlAnimation />
-        </Box>
-      </Container>
+      <AnimationProvider>
+        <Container>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 5 }}>
+            <BowlAnimation />
+          </Box>
+        </Container>
+      </AnimationProvider>
     </ThemeProvider>
   );
 }
