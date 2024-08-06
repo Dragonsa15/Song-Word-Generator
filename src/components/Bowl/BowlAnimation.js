@@ -6,25 +6,16 @@ import words from "../../assets/words.json";
 import DrawButton from '../DrawButton/DrawButton';
 import WordDisplay from '../WordDisplay/WordDisplay';
 import AcceptedWords from "../AcceptedWords/AcceptedWords";
+import FlowerDisplay from '../FlowerDisplay/FlowerDisplay';
 
 const BowlAnimation = () => {
   const [word, setWord] = useState(null);
   const [acceptedWords, setAcceptedWords] = useState([]);
-  const [isAnimatingOthers, setIsAnimatingOthers] = useState(true); // State for other chits' animation
-
+  
   useEffect(() => {
     setupChits();
   }, [acceptedWords]);
 
-  useEffect(() => {
-    let interval;
-    if (isAnimatingOthers) {
-      animateChits();
-      interval = setInterval(animateChits, 1000); // Re-animate every 1 second
-    }
-
-    return () => clearInterval(interval); // Cleanup on unmount
-  }, [isAnimatingOthers]);
 
   useEffect(() => {
     if (word) {
@@ -62,30 +53,11 @@ const BowlAnimation = () => {
     return { x, y, rotation };
   };
 
-  const animateChits = () => {
-    const chits = document.querySelectorAll('.chit');
-    chits.forEach(chit => {
-      if (chit.id === word) return; // Skip the chosen chit
-
-      const { x, y, rotation } = randomTransform();
-      gsap.to(chit, {
-        duration: 1,
-        x,
-        y,
-        rotation,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-      });
-    });
-  };
-
   const drawWord = () => {
     const availableWords = getSongWords().filter(w => !acceptedWords.includes(w));
     if (availableWords.length > 0) {
       const randomWord = availableWords[Math.floor(Math.random() * availableWords.length)];
       setWord(randomWord);
-      setIsAnimatingOthers(false); // Stop other chits' animations
     } else {
       alert("No more words to draw.");
     }
@@ -97,8 +69,7 @@ const BowlAnimation = () => {
 
   const acceptWord = () => {
     setAcceptedWords([...acceptedWords, word]);
-    setIsAnimatingOthers(true); // Resume animations for other chits
-
+    
     if (word) {
       const chosenChitElement = document.getElementById(word);
       chosenChitElement.remove();
@@ -147,7 +118,6 @@ const BowlAnimation = () => {
 
       reverseAnimation(chosenChitElement); // Reverse the animation for the chosen chit
 
-      setIsAnimatingOthers(true); // Resume animations for other chits
     }
   };
 
@@ -158,27 +128,27 @@ const BowlAnimation = () => {
   const setupChits = () => {
     const availableWords = getSongWords().filter(w => !acceptedWords.includes(w));
 
-    const jar = document.querySelector('.jar');
-    jar.innerHTML = ''; // Clear existing chits
-    availableWords.forEach((word) => {
-      const chit = document.createElement('div');
-      chit.className = 'chit';
-      chit.id = word;
-      chit.style.display = 'block';
-      jar.appendChild(chit);
-    });
+    // const jar = document.querySelector('.jar');
+    // jar.innerHTML = ''; // Clear existing chits
+    // availableWords.forEach((word) => {
+    //   const chit = document.createElement('div');
+    //   chit.className = 'chit';
+    //   chit.id = word;
+    //   chit.style.display = 'block';
+    //   jar.appendChild(chit);
+    // });
   };
 
   return (
-    <Container style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '50px' }}>
-      <Box className="jar-container" sx={{ position: 'relative', width: 300, height: 300, border: '5px solid #000', borderRadius: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', transition: 'transform 0.5s' }}>
-        <Box className="jar" sx={{ position: 'relative', width: '100%', height: '100%' }}>
-        </Box>
-      </Box>
+    <>
+      <FlowerDisplay word={word} style={{position: 'absolute', top:-500, left: 0}}/>
+      <Container style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '50px' }}>
       {!word && <DrawButton onClick={drawChit} />}
       {word && <WordDisplay word={word} onAccept={acceptWord} onReroll={rerollWord} />}
       <AcceptedWords words={acceptedWords} />
-    </Container>
+    </Container>  
+    </>
+    
   );
 };
 

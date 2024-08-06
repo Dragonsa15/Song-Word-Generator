@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lotus Animation</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; }
+    #startButton { position: absolute; top: 10px; left: 10px; }
+  </style>
+</head>
+<body>
+  <button id="startButton">Start Animation</button>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+  <script>
+    let scene, camera, renderer;
+    let petals = [];
+    let woodBlock;
+
+    init();
+    animate();
+
+    function init() {
+      // Scene, Camera, Renderer setup
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      // Lighting
+      const light = new THREE.PointLight(0xffffff, 1, 100);
+      light.position.set(10, 10, 10);
+      scene.add(light);
+
+      // Create Lotus Flower Petals
+      for (let i = 0; i < 8; i++) {
+        let geometry = new THREE.PlaneGeometry(1, 2);
+        let material = new THREE.MeshBasicMaterial({ color: 0xff6699 });
+        let petal = new THREE.Mesh(geometry, material);
+        petal.position.set(Math.sin(i * Math.PI / 4), 0, Math.cos(i * Math.PI / 4));
+        petal.rotation.x = -Math.PI / 2;
+        petals.push(petal);
+        scene.add(petal);
+      }
+
+      // Create Wood Block
+      let blockGeometry = new THREE.BoxGeometry(2, 1, 0.5);
+      let blockMaterial = new THREE.MeshBasicMaterial({ color: 0x8B4513 });
+      woodBlock = new THREE.Mesh(blockGeometry, blockMaterial);
+      woodBlock.position.set(0, -2, 0);
+      scene.add(woodBlock);
+
+      // Set Camera Position
+      camera.position.z = 5;
+
+      // Add Event Listener for Button Click
+      document.getElementById('startButton').addEventListener('click', startAnimation);
+    }
+
+    function startAnimation() {
+      // Animate Petals Blooming
+      petals.forEach((petal, index) => {
+        gsap.to(petal.rotation, { duration: 2, x: 0, delay: index * 0.1 });
+      });
+
+      // Animate Petals Spreading Out and Releasing the Wood Block
+      gsap.to(petals, { duration: 1, x: '+=0.5', z: '+=0.5', delay: 2 });
+      gsap.to(woodBlock.position, { duration: 1, y: 0, delay: 2 });
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+    }
+  </script>
+</body>
+</html>

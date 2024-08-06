@@ -1,12 +1,12 @@
-body {
-  margin: 0;
-  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f5f5; /* Light background */
-  color: #333; /* Dark text for contrast */
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
+/* src/App.css or a separate global.css file */
+body, html, #root {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-image: url('/assets/teej-background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+  }
+  
