@@ -1,0 +1,192 @@
+[
+  {
+    "english": "Balma",
+    "hindi": "बलमा",
+    "sound": "assets/Words_Data/Balma/Balma.ogg"
+  },
+  {
+    "english": "Bhavra",
+    "hindi": "भवरा",
+    "sound": "assets/Words_Data/Bhavra/Bhavra.ogg"
+  },
+  {
+    "english": "Choodi",
+    "hindi": "चूड़ी",
+    "sound": "assets/Words_Data/Choodi/Choodi.ogg"
+  },
+  {
+    "english": "Deewana",
+    "hindi": "दीवाना",
+    "sound": "assets/Words_Data/Deewana/Deewana.ogg"
+  },
+  {
+    "english": "Dil",
+    "hindi": "दिल",
+    "sound": "assets/Words_Data/Dil/Dil.ogg"
+  },
+  {
+    "english": "Do",
+    "hindi": "दो",
+    "sound": "assets/Words_Data/Do/Do.ogg"
+  },
+  {
+    "english": "Ek",
+    "hindi": "एक",
+    "sound": "assets/Words_Data/Ek/Ek.ogg"
+  },
+  {
+    "english": "Geet",
+    "hindi": "गीत",
+    "sound": "assets/Words_Data/Geet/Geet.ogg"
+  },
+  {
+    "english": "Gore",
+    "hindi": "गोरे",
+    "sound": "assets/Words_Data/Gore/Gore.ogg"
+  },
+  {
+    "english": "Haal",
+    "hindi": "हाल",
+    "sound": "assets/Words_Data/Haal/Haal.ogg"
+  },
+  {
+    "english": "Hay",
+    "hindi": "हाय",
+    "sound": "assets/Words_Data/Hay/Hay.ogg"
+  },
+  {
+    "english": "Ishq",
+    "hindi": "इश्क",
+    "sound": "assets/Words_Data/Ishq/Ishq.ogg"
+  },
+  {
+    "english": "Jaadu",
+    "hindi": "जादू",
+    "sound": "assets/Words_Data/Jaadu/Jaadu.ogg"
+  },
+  {
+    "english": "Jab",
+    "hindi": "जब",
+    "sound": "assets/Words_Data/Jab/Jab.ogg"
+  },
+  {
+    "english": "Jiya",
+    "hindi": "जिया",
+    "sound": "assets/Words_Data/Jiya/Jiya.ogg"
+  },
+  {
+    "english": "Kabhi",
+    "hindi": "कभी",
+    "sound": "assets/Words_Data/Kabhi/Kabhi.ogg"
+  },
+  {
+    "english": "Kasam",
+    "hindi": "कसम",
+    "sound": "assets/Words_Data/Kasam/Kasam.ogg"
+  },
+  {
+    "english": "Laal",
+    "hindi": "लाल",
+    "sound": "assets/Words_Data/Laal/Laal.ogg"
+  },
+  {
+    "english": "Main",
+    "hindi": "मैं",
+    "sound": "assets/Words_Data/Main/Main.ogg"
+  },
+  {
+    "english": "Mausam",
+    "hindi": "मौसम",
+    "sound": "assets/Words_Data/Mausam/Mausam.ogg"
+  },
+  {
+    "english": "Mehandi",
+    "hindi": "मेहंदी",
+    "sound": "assets/Words_Data/Mehandi/Mehandi.ogg"
+  },
+  {
+    "english": "Mehboob",
+    "hindi": "महबूब",
+    "sound": "assets/Words_Data/Mehboob/Mehboob.ogg"
+  },
+  {
+    "english": "Mere",
+    "hindi": "मेरे",
+    "sound": "assets/Words_Data/Mere/Mere.ogg"
+  },
+  {
+    "english": "Nain",
+    "hindi": "नैन",
+    "sound": "assets/Words_Data/Nain/Nain.ogg"
+  },
+  {
+    "english": "Nazar",
+    "hindi": "नजर",
+    "sound": "assets/Words_Data/Nazar/Nazar.ogg"
+  },
+  {
+    "english": "Oh",
+    "hindi": "ओ",
+    "sound": "assets/Words_Data/Oh/Oh.ogg"
+  },
+  {
+    "english": "Pal",
+    "hindi": "पल",
+    "sound": "assets/Words_Data/Pal/Pal.ogg"
+  },
+  {
+    "english": "Piya",
+    "hindi": "पिया",
+    "sound": "assets/Words_Data/Piya/Piya.ogg"
+  },
+  {
+    "english": "Pyaar",
+    "hindi": "प्यार",
+    "sound": "assets/Words_Data/Pyaar/Pyaar.ogg"
+  },
+  {
+    "english": "Saathiya",
+    "hindi": "साथिया",
+    "sound": "assets/Words_Data/Saathiya/Saathiya.ogg"
+  },
+  {
+    "english": "Sajan",
+    "hindi": "साजन",
+    "sound": "assets/Words_Data/Sajan/Sajan.ogg"
+  },
+  {
+    "english": "Sawan",
+    "hindi": "सावन",
+    "sound": "assets/Words_Data/Sawan/Sawan.ogg"
+  },
+  {
+    "english": "Tere",
+    "hindi": "तेरे",
+    "sound": "assets/Words_Data/Tere/Tere.ogg"
+  },
+  {
+    "english": "Vada",
+    "hindi": "वादा",
+    "sound": "assets/Words_Data/Vada/Vada.ogg"
+  },
+  {
+    "english": "Yaad",
+    "hindi": "याद",
+    "sound": "assets/Words_Data/Yaad/Yaad.ogg"
+  },
+  {
+    "english": "Yaar",
+    "hindi": "यार",
+    "sound": "assets/Words_Data/Yaar/Yaar.ogg"
+  },
+  {
+    "english": "Zindagi",
+    "hindi": "जिंदगी",
+    "sound": "assets/Words_Data/Zindagi/Zindagi.ogg"
+  },
+  {
+    "english": "yeh",
+    "hindi": "ये",
+    "sound": "assets/Words_Data/yeh/yeh.ogg"
+  }
+]

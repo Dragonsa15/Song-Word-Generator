@@ -22,10 +22,10 @@ const VignetteEffect = ({ targetRef, isActive }) => {
         height: circleDiameter,
         left: circleX - circleDiameter / 2,
         top: circleY - circleDiameter / 2,
-        duration: 0.5,
+        duration: 0.25,
       });
     } else {
-      gsap.to(overlayRef.current, { opacity: 0, duration: 0.5 });
+      gsap.to(overlayRef.current, { opacity: 0, duration: 0.25 });
     }
   }, [isActive, targetRef]);
 

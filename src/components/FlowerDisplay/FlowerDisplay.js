@@ -8,8 +8,8 @@ import { Box } from '@mui/system';
 import { useAnimationContext } from '../../providers/AnimationProvider';
 
 const FlowerDisplay = forwardRef((props, ref) => {
-  const [scale, setScale] = useState(0.5);
-  const { isFlowerCenter, triggerDrawAnimation, isDrawAnimationActive } = useAnimationContext();
+  const [scale, setScale] = useState(1);
+  const { isFlowerCenter, triggerDrawAnimation, isDrawAnimationActive, randomWord, audioLink, ResetStateButton } = useAnimationContext();
 
   useEffect(() => {
     console.log(isFlowerCenter)
@@ -21,133 +21,170 @@ const FlowerDisplay = forwardRef((props, ref) => {
   }, [isFlowerCenter]);
 
   const moveFlowerCenterAnimation = (reverse = false) => {
-    const targetScale = reverse ? 0.5 : 1; // Original scale: 0.5, Centered scale: 1.5
-    const targetTop = reverse ? '25%' : '25%';
-    const targetLeft = reverse ? '50%' : '50%'; // Center horizontally
-    console.log(targetScale,scale)
-    gsap.to('#flower-wrapper', {
-      top: targetTop,
-      left: targetLeft,
-      scale: targetScale/scale,
-      transformOrigin: 'center center',
-      duration: 1.5,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        setScale(targetScale)
-        if(!reverse) {
-          triggerDrawAnimation()
-        }
-      }
-    });
+    if(!reverse) {
+      triggerDrawAnimation()
+    }
+    else {
+      gsap.killTweensOf("#flower-wrapper")
 
+
+      removeChit()
+    }
   };
 
-  useEffect(() => {
-    if (isDrawAnimationActive) {
-      drawAnimations();
+  const removeChit = () => {
+    const chit = document.getElementById("chit")
+    if(chit) {
+      chit.remove()
     }
-  }, [isDrawAnimationActive]);
+
+    const petals = document.querySelectorAll('#flower > g');
+
+    petals.forEach((petal) => {
+      gsap.killTweensOf(petal)
+    })
+
+    gsap.killTweensOf(chit)
+    
+  }
+  // };
+
+  // useEffect(() => {
+  //   if (isDrawAnimationActive) {
+  //     drawAnimations();
+  //   }
+  // }, [isDrawAnimationActive]);
 
   const drawAnimations = () => {
     const petals = document.querySelectorAll('#flower > g');
     const petalsArray = Array.from(petals);
-  
-    if (petalsArray.length === 0) {
-      console.error("No petals found in the SVG.");
-      return;
+
+    const index = petalsArray.findIndex(element => element.id === "center-circle");
+    let extractedElement = null;
+
+    if (index !== -1) {
+      extractedElement = petalsArray.splice(index, 1)[0];
     }
-  
-    console.log("Petals found:", petalsArray);
-  
+
+    const svg = document.getElementById('flower');
+    const viewBox = svg.getAttribute('viewBox').split(' ');
+    const centerX = viewBox[2] / 2;
+    const centerY = viewBox[3] / 2;
+
+    const tl = gsap.timeline({ paused: true });
+
     petalsArray.forEach((petal, index) => {
       const randomRotation = gsap.utils.random(-360, 360);
-      const randomDistance = gsap.utils.random(100, 500);
+      const randomDistance = gsap.utils.random(10, 50);
       const randomAngle = gsap.utils.random(0, 360);
-  
+
       const translateX = randomDistance * Math.cos((randomAngle * Math.PI) / 180);
       const translateY = randomDistance * Math.sin((randomAngle * Math.PI) / 180);
-  
-      console.log(`Animating petal ${index}`, {
-        petal,
-        translateX,
-        translateY,
-        randomRotation
-      });
-  
-      gsap.to(petal, {
-        duration: 2,
-        opacity: 0.5, // Simplified to just change opacity
+
+      tl.to(petal, {
+        duration: 4,
+        delay: index / 10,
+        opacity: 0,
         x: translateX,
         y: translateY,
         rotation: randomRotation,
-        transformOrigin: 'center center',
+        transformOrigin: `${centerX}px ${centerY}px`,
         ease: 'power2.out',
-        onStart: () => console.log(`Animation started for petal ${index}`),
-        onComplete: () => console.log(`Animation completed for petal ${index}`),
       }, 0);
     });
-  
-    
-    // console.log(tl)
 
-    // if (extractedElement) {
-    //   const bbox = extractedElement.getBBox();
-    //   const matrix = extractedElement.getScreenCTM();
-    //   const circleSize = Math.max(bbox.width, bbox.height) * scale;
+    const bbox = extractedElement.getBBox();
+    const matrix = extractedElement.getScreenCTM();
+    const circleSize = Math.max(bbox.width, bbox.height) * 0.5;
+
+    const absoluteX = matrix.a * bbox.x + matrix.c * bbox.y + matrix.e;
+    const absoluteY = matrix.b * bbox.x + matrix.d * bbox.y + matrix.f;
+
+    const container = document.getElementById('flower-wrapper');
+    const containerRect = container.getBoundingClientRect();
+    const adjustedX = absoluteX - containerRect.left;
+    const adjustedY = absoluteY - containerRect.top;
+
+    console.log(adjustedX, adjustedY, absoluteX, absoluteY, bbox, circleSize);
+
+    const normalCircle = document.createElement('div');
+  normalCircle.id = "chit";
+  normalCircle.style.width = `${circleSize}px`;
+  normalCircle.style.height = `${circleSize}px`;
+  normalCircle.style.borderRadius = '50%';
+  normalCircle.style.background = 'lightyellow';
+  normalCircle.style.position = 'absolute';
+  normalCircle.style.left = `${adjustedX}px`;
+  normalCircle.style.top = `${adjustedY}px`;
+  normalCircle.style.opacity = '0';
+  normalCircle.style.display = 'flex';
+  normalCircle.style.flexDirection = 'column';  // Stack text and audio vertically
+  normalCircle.style.alignItems = 'center';
+  normalCircle.style.justifyContent = 'center';
+  normalCircle.style.padding = '10px';
+  normalCircle.style.fontSize = '10px'; // Smaller font size before scaling
+  normalCircle.style.color = 'black';
+
+  // Create and style the text element
+  const textElement = document.createElement('div');
+  textElement.innerText = randomWord;
+  textElement.style.textAlign = 'center';
+  textElement.style.width = '100%';  // Full width to center text correctly
+
+  // Append audio player and text to the normalCircle
+  normalCircle.appendChild(textElement);
   
-    //   const absoluteX = matrix.a * bbox.x + matrix.c * bbox.y + matrix.e;
-    //   const absoluteY = matrix.b * bbox.x + matrix.d * bbox.y + matrix.f;
-  
-    //   const container = document.getElementById('flower-wrapper');
-    //   const containerRect = container.getBoundingClientRect();
-    //   const adjustedX = absoluteX - containerRect.left;
-    //   const adjustedY = absoluteY - containerRect.top;
-  
-    //   const normalCircle = document.createElement('div');
-    //   normalCircle.style.width = `${circleSize}px`;
-    //   normalCircle.style.height = `${circleSize}px`;
-    //   normalCircle.style.borderRadius = '50%';
-    //   normalCircle.style.background = 'lightyellow';
-    //   normalCircle.style.position = 'absolute';
-    //   normalCircle.style.left = `${adjustedX - circleSize / 2}px`; // Center the circle
-    //   normalCircle.style.top = `${adjustedY - circleSize / 2}px`; // Center the circle
-    //   normalCircle.style.opacity = '0';
-  
-    //   container.appendChild(normalCircle);
-  
-    //   tl.to(extractedElement, {
-    //     duration: 2,
-    //     rotation: 540,
-    //     scale: 3,
-    //     transformOrigin: 'center center',
-    //     ease: 'power2.inOut',
-    //   }, '-=3.5')
-    //   .to(extractedElement, {
-    //     duration: 1,
-    //     opacity: 0,
-    //     onComplete: () => {
-    //       extractedElement.style.display = 'none';
-    //     }
-    //   }, '-=2.5')
-    //   .to(normalCircle, {
-    //     duration: 1,
-    //     opacity: 0.6,
-    //     scale: 3,
-    //     ease: 'power2.outIn',
-    //   }, '-=2.7');
-  
-    //   tl.play();
-    // }
+  container.appendChild(normalCircle);
+
+    tl.to(extractedElement, {
+      duration: 2,
+      rotation: 540,
+      scale: 8,
+      transformOrigin: 'center center',
+      ease: 'power2.inOut',
+    }, '-=5')
+    .to(extractedElement, {
+      duration: 1,
+      opacity: 0,
+      onComplete: () => {
+        extractedElement.style.display = 'none';
+      }
+    }, '-=4')
+    .to(normalCircle, {
+      duration: 1,
+      opacity: 0.9,
+      scale: 8,
+      ease: 'power2.outIn',
+      onComplete: () => {
+        // Create and style the audio element
+        // const audioPlayer = document.createElement('audio');
+        // audioPlayer.controls = true;
+        // audioPlayer.src = `${process.env.PUBLIC_URL}/${audioLink}`;
+        // audioPlayer.style.maxWidth = '100%';  // Limit the width of the audio player
+        // audioPlayer.style.marginBottom = '5px';  // Space between text and audio
+        // normalCircle.appendChild(audioPlayer);
+        // audioPlayer.nodeType = "audio/ogg"
+        // audioPlayer.play()
+      }
+    }, '-=4');
+
+    tl.play();
   };
-  
+
 
 
   useEffect(() => {
     console.log("useEffect called");
-    setTimeout(() => {
-      // initAnimations();
-    }, 100);
-  }, []);
+    if(isDrawAnimationActive) {
+      console.log("inside is draw animation Active");
+      setTimeout(() => {
+        drawAnimations()
+      }, 100);
+    }
+    else {
+      ResetStateButton();
+    }
+  }, [isDrawAnimationActive]);
 
   return (
     <Box
@@ -157,7 +194,7 @@ const FlowerDisplay = forwardRef((props, ref) => {
         width: 1080 * scale,
         height: 1080 * scale,
         position: 'absolute',
-        top: '25%',
+        top: '35%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
         backgroundColor: 'transparent',

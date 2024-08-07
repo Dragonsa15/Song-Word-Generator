@@ -9,16 +9,37 @@ export const AnimationProvider = ({ children }) => {
   const [isFlowerCenter, setIsFlowerCenter] = useState(false);
   const [isDrawAnimationActive, setIsDrawAnimationActive] = useState(false);
   const [randomWord, setRandomWord] = useState('');
+  const [audioLink, setAudioLink] = useState('');
 
-  const triggerDrawButton = (word) => {
+  const triggerDrawButton = (word,link) => {
     setIsVignetteActive(true);
     setRandomWord(word)
+    setAudioLink(link)
     console.log("Came into this function", word)
     setTimeout(() => {
       setIsFlowerCenter(true);
-    }, 2000); // Duration of vignette animation
+    }, 500); // Duration of vignette animation
   };
 
+  const detriggerDrawAnimation = () => {
+    setIsDrawAnimationActive(false);
+  }
+
+  const AcceptWordButton = (word) => {
+    detriggerDrawAnimation();
+    setIsFlowerCenter(false);
+    setIsVignetteActive(false);
+    setRandomWord('')
+    setAudioLink('')
+  }
+
+  const ResetStateButton = () => {
+    detriggerDrawAnimation();
+    setIsFlowerCenter(false);
+    setIsVignetteActive(false);
+    setRandomWord('')
+    setAudioLink('')
+  }
   const triggerDrawAnimation = () => {
     setIsDrawAnimationActive(true);
   };
@@ -33,6 +54,9 @@ export const AnimationProvider = ({ children }) => {
         setRandomWord,
         triggerDrawButton,
         triggerDrawAnimation,
+        AcceptWordButton,
+        ResetStateButton,
+        audioLink,
       }}
     >
       {children}

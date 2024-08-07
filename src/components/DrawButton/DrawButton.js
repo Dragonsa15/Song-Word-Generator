@@ -6,7 +6,7 @@ const DrawButton = ({ onClick }) => {
     <Button
       variant="contained"
       onClick={onClick}
-      sx={{ position: 'absolute', bottom: 20 }}
+      sx={{ position: 'absolute', bottom: 150 }}
     >
       Draw Word
     </Button>

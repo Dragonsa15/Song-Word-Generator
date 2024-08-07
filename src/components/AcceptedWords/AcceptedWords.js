@@ -1,18 +1,29 @@
 import React from 'react';
-import { Box, List, ListItem, ListItemText } from '@mui/material';
-import CheckIcon from '@mui/icons-material/Check';
+import { Box } from '@mui/material';
 
 const AcceptedWords = ({ words }) => {
   return (
-    <Box sx={{ maxHeight: 200, overflowY: 'auto', mt: 2, position: 'absolute', top: 20, right: 20 }}>
-      <List>
-        {words.map((word, index) => (
-          <ListItem key={index}>
-            <CheckIcon sx={{ marginRight: 1 }} />
-            <ListItemText primary={word} />
-          </ListItem>
-        ))}
-      </List>
+    <Box sx={{
+      position: 'fixed',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'black', // Or any other color you prefer
+      color: 'white',
+      padding: '10px',
+      maxWidth: '100%', // Ensures it doesn't extend beyond the viewport
+      overflow: 'hidden', // Prevents extending past max width
+      textOverflow: 'ellipsis', // Adds an ellipsis if the text is too long
+      whiteSpace: 'nowrap' // Keeps the text in a single line
+    }}>
+      {words.map((word, index) => (
+        <Box key={index} sx={{ margin: '0 10px' }}>
+          {word}
+        </Box>
+      ))}
     </Box>
   );
 };
